@@ -16,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class TopicosService {
     @Autowired
@@ -37,9 +40,9 @@ public class TopicosService {
         return topicoDTO;
     }
 
-    public Page<TopicoDTO> listarTopicos(Pageable pageable) {
-        return this.topicoRepository.findAll(pageable)
-                .map(TopicoDTO::new);
+    public List<TopicoDTO> listarTopicos() {
+        return this.topicoRepository.findAll().stream()
+                .map(TopicoDTO::new).collect(Collectors.toList());
     }
 
     public TopicoDTO buscarTopico(Long id) {

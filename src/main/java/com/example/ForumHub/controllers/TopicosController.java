@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -47,8 +48,8 @@ public class TopicosController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<TopicoDTO>> listarTopicos(@PageableDefault(sort = {"titulo"}) Pageable pageable){
-        var listagemTopicos = this.topicosService.listarTopicos(pageable);
+    public ResponseEntity<List<TopicoDTO>> listarTopicos(){
+        var listagemTopicos = this.topicosService.listarTopicos();
         return ResponseEntity.ok(listagemTopicos);
     }
 
